@@ -1,0 +1,11 @@
+<h1>Movies Index</h1>
+
+<% @movies.each do |movie| %>
+  <div>
+    <p>Movie Title: <%= movie.title %></p>
+    <p>Movie Genre: <%= movie.genre.name %></p>
+    <p>Release Date: <%= movie.release_date %></p>
+    <p>Mood: <%= movie.mood_tag.name %></p><br>
+    <%= link_to "Show", movie_path(movie) %>
+  </div>
+<% end %>

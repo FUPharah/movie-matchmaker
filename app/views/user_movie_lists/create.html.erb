@@ -1,0 +1,8 @@
+
+
+<%=simple_form_for @user_movie_list do |f| %>
+  <%=f.input :movie_list_id, as: :hidden, input_html: { value: @movie_list.id } %>
+  <%=f.input :user_id, as: :hidden, input_html: { value: current_user.id }  %>
+  <%=f.input :favorite, as: :boolean %>
+  <%=f.button :submit %>
+<%end %>

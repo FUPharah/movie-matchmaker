@@ -1,0 +1,10 @@
+<h1>movies show</h1>
+
+<%= @movie.title %>
+<%= @movie.genre.name %>
+<%= @movie.release_date %>
+<%= @movie.mood_tag.name %>
+
+<%= link_to "Favorite", movies_create_path %>,
+
+<%= link_to "Back to Movies", movies_path %>

@@ -1,0 +1,9 @@
+<h1>Favorite Movies</h1>
+
+<% @user_movie_lists.where(favorite: true).each do |user_movie_list| %>
+  <div>
+    <%= user_movie_list.movie.title %>
+  </div>
+<% end %>
+
+<%= link_to "Back to User Movie Lists", user_movie_lists_path %>
