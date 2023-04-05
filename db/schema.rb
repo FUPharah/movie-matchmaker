@@ -10,9 +10,54 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_05_020327) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_05_022354) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "genres", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "mood_tags", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "movies", force: :cascade do |t|
+    t.string "title"
+    t.string "poster_image_url"
+    t.date "release_date"
+    t.bigint "genre_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "mood_tag_id", null: false
+    t.index ["genre_id"], name: "index_movies_on_genre_id"
+    t.index ["mood_tag_id"], name: "index_movies_on_mood_tag_id"
+  end
+
+  create_table "ratings", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "movie_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "score"
+    t.index ["movie_id"], name: "index_ratings_on_movie_id"
+    t.index ["user_id"], name: "index_ratings_on_user_id"
+  end
+
+  create_table "user_movie_lists", force: :cascade do |t|
+    t.string "watchlist"
+    t.string "favorites"
+    t.bigint "user_id", null: false
+    t.bigint "movie_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["movie_id"], name: "index_user_movie_lists_on_movie_id"
+    t.index ["user_id"], name: "index_user_movie_lists_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -26,4 +71,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_05_020327) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "movies", "genres"
+  add_foreign_key "movies", "mood_tags"
+  add_foreign_key "ratings", "movies"
+  add_foreign_key "ratings", "users"
+  add_foreign_key "user_movie_lists", "movies"
+  add_foreign_key "user_movie_lists", "users"
 end
