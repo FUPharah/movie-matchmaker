@@ -1,7 +1,17 @@
-.navbar-lewagon {
+.navbar-lewagon .container-fluid {
+  display: flex;
   justify-content: space-between;
-  background: white;
+  background: hsla(0, 86%, 71%, 0.89);
+  margin-top: 0;
+  padding-top: 0;
 }
+
+.navbar.navbar-lewagon {
+  margin-top: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
 
 .navbar-lewagon .navbar-collapse {
   flex-grow: 0;

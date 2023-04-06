@@ -1,12 +1,23 @@
 class PagesController < ApplicationController
-  skip_before_action :authenticate_user!, only: [ :home ]
+  skip_before_action :authenticate_user!, only: [:home]
 
   def home
-    if params[:search]
+    if params[:search].present?
       @movies = OmdbService.search_movies(params[:search])
-      flash.now[:warning] = "No results found for '#{params[:search]}'" if @movies.empty?
+    elsif params[:genre]
+      @movies = OmdbService.search_movies_by_genre(params[:genre], 10)
+    elsif params[:mood]
+      @movies = OmdbService.search_movies_by_mood(params[:mood], 10)
     else
-      @movies = OmdbService.search_movies('American Pie')
+      # Replace the following movie titles with whatever selection of featured movies you want to display
+      # Fetch featured movies
+      featured_movie_titles = ['American Pie', 'The Matrix', 'The Godfather']
+      @featured_movies = featured_movie_titles.map { |title| OmdbService.search_movies(title) }.flatten
+
+      # Fetch movies by genre
+      @action_movies = OmdbService.search_movies_by_genre('Action', 10)
+      @romance_movies = OmdbService.search_movies_by_genre('Romance', 10)
+      @comedy_movies = OmdbService.search_movies_by_genre('Comedy', 10)
     end
   end
 end

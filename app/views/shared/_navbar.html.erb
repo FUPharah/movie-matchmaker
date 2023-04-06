@@ -9,11 +9,16 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto">
+      <ul class="navbar-nav">
+        <%= render 'shared/genre_and_mood_dropdowns' %>
         <% if user_signed_in? %>
           <li class="nav-item active">
             <%= link_to "Home", "#", class: "nav-link" %>
           </li>
+        <% end %>
+      </ul>
+      <ul class="navbar-nav ms-auto">
+        <% if user_signed_in? %>
           <li class="nav-item">
             <%= link_to "Dashboard", dashboard_path, class: "nav-link" %>
           </li>
