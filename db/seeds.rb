@@ -26,28 +26,28 @@ User.destroy_all
 # exciting = MoodTag.create!(name: 'Exciting')
 
 MOOD_TAGS = {
-  'Action': 'Exciting',
-  'Adventure': 'Adventurous',
-  'Animation': 'Imaginative',
-  'Biography': 'Inspirational',
-  'Comedy': 'Funny',
-  'Crime': 'Thrilling',
-  'Documentary': 'Informative',
-  'Drama': 'Emotional',
-  'Family': 'Heartwarming',
-  'Fantasy': 'Magical',
+  Action: 'Exciting',
+  Adventure: 'Adventurous',
+  Animation: 'Imaginative',
+  Biography: 'Inspirational',
+  Comedy: 'Funny',
+  Crime: 'Thrilling',
+  Documentary: 'Informative',
+  Drama: 'Emotional',
+  Family: 'Heartwarming',
+  Fantasy: 'Magical',
   'Film-Noir': 'Mysterious',
-  'History': 'Educational',
-  'Horror': 'Scary',
-  'Music': 'Energetic',
-  'Musical': 'Melodious',
-  'Mystery': 'Puzzling',
-  'Romance': 'Romantic',
+  History: 'Educational',
+  Horror: 'Scary',
+  Music: 'Energetic',
+  Musical: 'Melodious',
+  Mystery: 'Puzzling',
+  Romance: 'Romantic',
   'Sci-Fi': 'Futuristic',
-  'Sport': 'Motivating',
-  'Thriller': 'Suspenseful',
-  'War': 'Intense',
-  'Western': 'Rugged'
+  Sport: 'Motivating',
+  Thriller: 'Suspenseful',
+  War: 'Intense',
+  Western: 'Rugged'
 }
 
 MOOD_TAGS.each do |genre_name, mood_tag_name|
@@ -55,7 +55,6 @@ MOOD_TAGS.each do |genre_name, mood_tag_name|
   mood_tag = MoodTag.find_or_create_by!(name: mood_tag_name)
   genre.movies.update_all(mood_tag_id: mood_tag.id)
 end
-
 
 # puts 'creating users'
 # # Users
@@ -102,7 +101,6 @@ end
 # Rating.create!(user: user1, movie: movie1, score: 8)
 # Rating.create!(user: user2, movie: movie1, score: 9)
 # Rating.create!(user: user1, movie: movie2, score: 10)
-
 
 # puts 'creating user_movie_lists'
 # # UserMovieLists
