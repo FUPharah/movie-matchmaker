@@ -15,29 +15,19 @@
   </div>
 <% end %>
 
-
-<h2>Featured Movies</h2>
 <% if @movies.present? %>
-<div class="movie-card-container">
-  <% @movies.each do |movie| %>
-    <div class="movie-card">
-      <div class="movie-poster">
-        <% if movie.poster_url.present? %>
-          <%= image_tag movie.poster_url, alt: "#{movie.title} poster" %>
-        <% else %>
-          <p>No poster available</p>
-        <% end %>
-      </div>
-      <div class="movie-info">
-        <div class="movie-info">
-          <h3>Movie Title: <%= movie.title %></h3>
-          <p>Movie Genre: <%= movie.genre %></p>
-          <p>Release Date: <%= movie.year %></p>
-          <p>Mood: <%= movie.mood_tag %></p>
-          <%= link_to "Show Details", show_by_imdb_id_path(movie.imdb_id), class: "btn-show" %>
-        </div>
-      </div>
-    </div>
-  <% end %>
-</div>
+  <h2>Search Results</h2>
+  <%= render 'movies', movies: @movies %>
+<% else %>
+  <h2>Featured Movies</h2>
+  <%= render 'movies', movies: @featured_movies %>
+
+  <h2>Action Movies</h2>
+  <%= render 'movies', movies: @action_movies %>
+
+  <h2>Romance Movies</h2>
+  <%= render 'movies', movies: @romance_movies %>
+
+  <h2>Comedy Movies</h2>
+  <%= render 'movies', movies: @comedy_movies %>
 <% end %>
