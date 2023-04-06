@@ -1,0 +1,16 @@
+<h1>Dashboard</h1>
+
+<h2>Favorite Movies</h2>
+<% @user_favorite_movies.each do |movie| %>
+  <div>
+    <%= movie.title %>
+  </div>
+<% end %>
+<%= link_to "Edit your Favorites", edit_user_movie_list_path(@movie) %>
+
+<h2>Watchlist</h2>
+<% @user_watched_movies.each do |movie| %>
+  <div>
+    <%= movie.title %>
+  </div>
+<% end %>

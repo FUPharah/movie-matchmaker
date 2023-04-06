@@ -3,9 +3,10 @@ class DashboardController < ApplicationController
 
   def index
     @user_movie_lists = current_user.user_movie_lists
-    @user_favorite_movies = current_user.movies.where("user_movie_lists.watchlist = ?", false)
-    @user_watched_movies = current_user.movies.where("user_movie_lists.watchlist = ?", true)
+    @user_favorite_movies = current_user.user_movie_lists.where(is_favorite: true).map(&:movie)
+    @user_watched_movies = current_user.user_movie_lists.where(is_favorite: false).map(&:movie)
   end
+
 
   def favorite
     @user_movie_list = UserMovieList.create(

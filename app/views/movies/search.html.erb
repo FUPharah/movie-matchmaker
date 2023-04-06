@@ -1,0 +1,10 @@
+<h1>Search Results</h1>
+
+<% @movies.each do |movie| %>
+  <div>
+    <h3><%= movie["Title"] %></h3>
+    <p>Release Year: <%= movie["Year"] %></p>
+    <p>Type: <%= movie["Type"] %></p>
+    <img src="<%= movie["Poster"] %>" alt="<%= movie["Title"] %> poster" />
+  </div>
+<% end %>

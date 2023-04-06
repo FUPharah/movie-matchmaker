@@ -1,10 +1,23 @@
 <h1>movies show</h1>
 
-<%= @movie.title %>
-<%= @movie.genre.name %>
-<%= @movie.release_date %>
-<%= @movie.mood_tag.name %>
+<div class="movie-card">
+  <% if @movie["Response"] == "True" %>
+    <img src="<%= @movie["Poster"] %>" alt="<%= @movie["Title"] %>">
+    <div class="content">
+      <h3><%= @movie["Title"] %></h3>
+      <p>Movie Genre: <%= @movie["Genre"] %></p>
+      <p>Movie Release Date: <%= @movie["Released"] %></p>
+      <p>Mood: <%= @movie["Mood"] %></p>
+    </div>
+  <% else %>
+    <div class="content">
+      <p><%= @movie["Error"] %></p>
+    </div>
+  <% end %>
+</div>
 
-<%= link_to "Favorite", movies_create_path %>,
 
-<%= link_to "Back to Movies", movies_path %>
+<%#= link_to "Add to Favorites or Watchlist", new_user_movie_list_path(movie_id: @movie.id) %>
+
+
+<%= link_to "Back to Home", root_path %>

@@ -1,2 +1,43 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<%# home.html.erb %>
+<h1>Welcome to Movie Matchmaker</h1>
+
+<%= form_with url: root_path, method: :get, local: true do |form| %>
+  <div class="form-group">
+    <%= form.label :search, "Search for a movie:" %>
+    <%= form.text_field :search, class: "form-control", value: params[:search] %>
+  </div>
+  <%= form.submit "Search", class: "btn btn-primary" %>
+<% end %>
+
+<% if flash[:warning] %>
+  <div class="alert alert-warning">
+    <%= flash[:warning] %>
+  </div>
+<% end %>
+
+
+<h2>Featured Movies</h2>
+<% if @movies.present? %>
+<div class="movie-card-container">
+  <% @movies.each do |movie| %>
+    <div class="movie-card">
+      <div class="movie-poster">
+        <% if movie.poster_url.present? %>
+          <%= image_tag movie.poster_url, alt: "#{movie.title} poster" %>
+        <% else %>
+          <p>No poster available</p>
+        <% end %>
+      </div>
+      <div class="movie-info">
+        <div class="movie-info">
+          <h3>Movie Title: <%= movie.title %></h3>
+          <p>Movie Genre: <%= movie.genre %></p>
+          <p>Release Date: <%= movie.year %></p>
+          <p>Mood: <%= movie.mood_tag %></p>
+          <%= link_to "Show Details", show_by_imdb_id_path(movie.imdb_id), class: "btn-show" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+<% end %>
