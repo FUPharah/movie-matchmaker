@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_05_022354) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_05_103246) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -49,12 +49,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_05_022354) do
   end
 
   create_table "user_movie_lists", force: :cascade do |t|
-    t.string "watchlist"
-    t.string "favorites"
     t.bigint "user_id", null: false
     t.bigint "movie_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "is_favorite", default: false
     t.index ["movie_id"], name: "index_user_movie_lists_on_movie_id"
     t.index ["user_id"], name: "index_user_movie_lists_on_user_id"
   end

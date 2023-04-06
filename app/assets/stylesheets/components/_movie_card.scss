@@ -1,0 +1,33 @@
+.movie-card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.movie-card {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 15px;
+  max-width: 300px;
+  overflow: hidden;
+  position: relative;
+  flex-basis: calc(100% / 5 - 30px);
+}
+
+.movie-card img {
+  width: 100%;
+  height: auto;
+}
+
+.movie-card .content {
+  padding: 20px;
+}
+
+.movie-card h3 {
+  margin: 0 0 10px;
+}
+
+.movie-card p {
+  margin: 0 0 10px;
+}

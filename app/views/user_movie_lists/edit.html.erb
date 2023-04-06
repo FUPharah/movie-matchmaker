@@ -1,0 +1,22 @@
+<h1>Favorites or Watchlist</h1>
+
+<%= form_for @user_movie_list, url: { action: "create", movie_id: @movie.id } do |f| %>
+  <%= f.hidden_field :movie_id, value: @movie.id %>
+
+  <div>
+    <label>
+      <%= f.radio_button :is_favorite, true %>
+      Add to Favorites
+    </label>
+  </div>
+  <div>
+    <label>
+      <%= f.radio_button :is_favorite, false %>
+      Add to Watchlist
+    </label>
+  </div>
+
+  <%= f.submit "Edit Movie" %>
+<% end %>
+
+<%= link_to "Back", movie_path(@movie) %>

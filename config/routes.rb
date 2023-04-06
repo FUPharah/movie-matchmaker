@@ -1,11 +1,13 @@
 Rails.application.routes.draw do
   devise_for :users
 
-  resources :movies, only: %i[index show create] do
+  get '/movies/:imdb_id', to: 'movies#show_by_imdb_id', as: 'show_by_imdb_id'
+
+  resources :movies, only: %i[index search show create] do
     resources :ratings, only: %i[create destroy]
   end
 
-  resources :user_movie_lists, only: %i[new index edit create destroy] do
+  resources :user_movie_lists, only: %i[new index edit update create destroy] do
     collection do
       get :favorite
       get :watchlist
