@@ -13,7 +13,7 @@
           <h3><%= movie.title %></h3>
           <p>Genre: <%= movie.genre %></p>
           <p>Release Date: <%= movie.year %></p>
-          <p>Mood: <%= movie.mood_tag %></p>
+          <%# <p>Mood: <%= movie.mood_tag %></p> 
           <%= link_to "Show Details", show_by_imdb_id_path(movie.imdb_id), class: "btn-show" %>
         </div>
       </div>

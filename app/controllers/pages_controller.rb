@@ -11,13 +11,13 @@ class PagesController < ApplicationController
     else
       # Replace the following movie titles with whatever selection of featured movies you want to display
       # Fetch featured movies
-      featured_movie_titles = ['American Pie', 'The Matrix', 'The Godfather']
+      featured_movie_titles = ['American Pie']
       @featured_movies = featured_movie_titles.map { |title| OmdbService.search_movies(title) }.flatten
 
       # Fetch movies by genre
-      @action_movies = OmdbService.search_movies_by_genre('Action', 10)
-      @romance_movies = OmdbService.search_movies_by_genre('Romance', 10)
-      @comedy_movies = OmdbService.search_movies_by_genre('Comedy', 10)
+      @action_movies = OmdbService.search_movies_by_genre('Action', 5)
+      @romance_movies = OmdbService.search_movies_by_genre('Romance', 5)
+      @comedy_movies = OmdbService.search_movies_by_genre('Comedy', 5)
     end
   end
 end

@@ -5,28 +5,28 @@ class OmdbService
   BASE_URL = "http://www.omdbapi.com"
 
   MOOD_TAGS = {
-    'Action': 'Exciting',
-    'Adventure': 'Adventurous',
-    'Animation': 'Imaginative',
-    'Biography': 'Inspirational',
-    'Comedy': 'Funny',
-    'Crime': 'Thrilling',
-    'Documentary': 'Informative',
-    'Drama': 'Emotional',
-    'Family': 'Heartwarming',
-    'Fantasy': 'Magical',
+    Action: 'Exciting',
+    Adventure: 'Adventurous',
+    Animation: 'Imaginative',
+    Biography: 'Inspirational',
+    Comedy: 'Funny',
+    Crime: 'Thrilling',
+    Documentary: 'Informative',
+    Drama: 'Emotional',
+    Family: 'Heartwarming',
+    Fantasy: 'Magical',
     'Film-Noir': 'Mysterious',
-    'History': 'Educational',
-    'Horror': 'Scary',
-    'Music': 'Energetic',
-    'Musical': 'Melodious',
-    'Mystery': 'Puzzling',
-    'Romance': 'Romantic',
+    History: 'Educational',
+    Horror: 'Scary',
+    Music: 'Energetic',
+    Musical: 'Melodious',
+    Mystery: 'Puzzling',
+    Romance: 'Romantic',
     'Sci-Fi': 'Futuristic',
-    'Sport': 'Motivating',
-    'Thriller': 'Suspenseful',
-    'War': 'Intense',
-    'Western': 'Rugged'
+    Sport: 'Motivating',
+    Thriller: 'Suspenseful',
+    War: 'Intense',
+    Western: 'Rugged'
   }
 
   def self.search_movies(query)
