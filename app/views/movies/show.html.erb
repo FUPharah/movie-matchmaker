@@ -10,6 +10,8 @@
       <p>Release Date: <%= @movie["Released"] %></p>
       <%# <p>Mood: <%= @movie["Mood"] %></p>
 
+      <%= link_to "Add to Favorite", add_favorite_movie_path(@movie["imdbID"]), method: :post, class: "btn btn-primary" %>
+      <%= link_to "Add to Watchlist", add_watchlist_movie_path(@movie["imdbID"]), method: :post, class: "btn btn-primary" %>
     </div>
   <% else %>
     <div class="movie-info">

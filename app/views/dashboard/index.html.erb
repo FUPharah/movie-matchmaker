@@ -1,16 +1,30 @@
+<!-- app/views/dashboard.html.erb -->
+
 <h1>Dashboard</h1>
 
-<h2>Favorite Movies</h2>
-<% @user_favorite_movies.each do |movie| %>
-  <div>
-    <%= movie.title %>
-  </div>
-<% end %>
-<%= link_to "Edit your Favorites", edit_user_movie_list_path(@movie) %>
+<h2>Favorited Movies</h2>
 
-<h2>Watchlist</h2>
-<% @user_watched_movies.each do |movie| %>
-  <div>
-    <%= movie.title %>
-  </div>
+<% if current_user.user_movie_lists.where(is_favorite: true).any? %>
+  <ul>
+    <% current_user.user_movie_lists.where(is_favorite: true).each do |user_movie_list| %>
+      <li><%= user_movie_list.movie.title %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No favorited movies found.</p>
 <% end %>
+
+<h2>Watchlist Movies</h2>
+
+<% if current_user.user_movie_lists.where(watchlist: true).any? %>
+  <ul>
+    <% current_user.user_movie_lists.where(watchlist: true).each do |user_movie_list| %>
+      <li><%= user_movie_list.movie.title %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No movies found in watchlist.</p>
+<% end %>
+
+<%= link_to 'Back to home', root_path %>
+

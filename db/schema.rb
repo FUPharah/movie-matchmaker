@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_05_103246) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_07_131411) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -34,7 +34,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_05_103246) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "mood_tag_id", null: false
+    t.string "imdb_id"
+    t.integer "year"
+    t.string "type"
     t.index ["genre_id"], name: "index_movies_on_genre_id"
+    t.index ["imdb_id"], name: "index_movies_on_imdb_id", unique: true
     t.index ["mood_tag_id"], name: "index_movies_on_mood_tag_id"
   end
 
@@ -54,6 +58,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_05_103246) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "is_favorite", default: false
+    t.boolean "watchlist", default: false
     t.index ["movie_id"], name: "index_user_movie_lists_on_movie_id"
     t.index ["user_id"], name: "index_user_movie_lists_on_user_id"
   end

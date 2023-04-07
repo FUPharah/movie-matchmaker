@@ -4,19 +4,6 @@ class UserMovieListsController < ApplicationController
     @movie = Movie.find(params[:movie_id])
   end
 
-  def create
-    @user_movie_list = UserMovieList.new(user_movie_list_params)
-    @user_movie_list.user = current_user
-    @user_movie_list.movie = Movie.find(params[:movie_id])
-
-    if @user_movie_list.save
-      redirect_to dashboard_path
-    else
-      @movie = Movie.find(params[:movie_id])
-      render :new, status: :unprocessable_entity
-    end
-  end
-
   def edit
     @user_movie_list = UserMovieList.find(params[:id])
     @movie = Movie.find(params[:movie_id])
@@ -29,6 +16,40 @@ class UserMovieListsController < ApplicationController
     else
       @movie = Movie.find(params[:movie_id])
       render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def add_to_watchlist
+    @movie = Movie.find(params[:movie_id])
+    @user_movie_list = UserMovieList.new(user_id: current_user.id, movie_id: @movie.id, watchlist: true)
+
+    if @user_movie_list.save
+      redirect_to dashboard_path
+    else
+      @movie = Movie.find(params[:movie_id])
+      render :new, status: :unprocessable_entity
+    end
+  end
+
+  def create
+    is_favorite = params[:user_movie_list][:is_favorite] == "1"
+
+    if is_favorite
+      add_to_favorites
+    else
+      add_to_watchlist
+    end
+  end
+
+  def add_to_favorites
+    @movie = Movie.find(params[:movie_id])
+    @user_movie_list = UserMovieList.new(user_id: current_user.id, movie_id: @movie.id, is_favorite: true)
+
+    if @user_movie_list.save
+      redirect_to dashboard_path
+    else
+      @movie = Movie.find(params[:movie_id])
+      render :new, status: :unprocessable_entity
     end
   end
 

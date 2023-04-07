@@ -75,10 +75,10 @@ class OmdbService
     Movie.new(
       title: movie_data['Title'],
       year: movie_data['Year'],
-      genre: movie_data['Genre'],
-      poster_url: movie_data['Poster'],
+      genre: map_genre_to_model(movie_data['Genre']),
+      poster_image_url: movie_data['Poster'],
       imdb_id: movie_data['imdbID'],
-      mood_tag: map_genre_to_model(movie_data['Genre'])&.name
+      mood_tag: MoodTag.find_by(name: MOOD_TAGS[movie_data['Genre'].to_sym])
     )
   end
 
@@ -141,7 +141,15 @@ class OmdbService
     Genre.find_by(name: genre_name)
   end
 
+  def self.genre_to_mood(genre)
+    genres = genre.split(', ')
+    moods = genres.map { |g| MOOD_TAGS[g.to_sym] }.compact
+    moods.join(', ')
+  end
+
+
   def self.get_movie_details(imdb_id)
+    puts "Fetching movie details for IMDb ID: #{imdb_id}"
     # Cache the API response for a specific IMDB ID
     cache_key = "movie-details-#{imdb_id}"
     parsed_response = Rails.cache.fetch(cache_key, expires_in: 12.hours) do
@@ -152,8 +160,8 @@ class OmdbService
     # Map genres to mood tags
     if parsed_response["Response"] == "True"
       genres = parsed_response["Genre"].split(", ")
-      mood_tags = genres.map { |genre| MOOD_TAGS[genre.to_sym] }.compact
-      parsed_response["Mood"] = mood_tags.join(", ")
+      mood_tags = genre_to_mood(genres.join(", ")) # Call genre_to_mood method
+      parsed_response["Mood"] = mood_tags
     end
 
     parsed_response
