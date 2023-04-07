@@ -5,6 +5,11 @@ Rails.application.routes.draw do
 
   resources :movies, only: %i[index search show create] do
     resources :ratings, only: %i[create destroy]
+
+    member do
+      get :add_favorite
+      get :add_watchlist
+    end
   end
 
   resources :user_movie_lists, only: %i[new index edit update create destroy] do
