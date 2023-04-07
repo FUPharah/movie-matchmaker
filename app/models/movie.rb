@@ -13,13 +13,14 @@ class Movie < ApplicationRecord
       year: movie_details['Year'],
       imdb_id: movie_details['imdbID'],
       poster_image_url: movie_details['Poster'],
-      mood_tag: mood_tag_instance
+      mood_tag: mood_tag_instance,
+      genre: movie_details['Genre'].split(',').first.strip
     )
 
-    genre_name = movie_details['Genre'].split(',').first.strip
-    genre = Genre.find_or_create_by(name: genre_name)
+    # genre_name = movie_details['Genre'].split(',').first.strip
+    # genre = Genre.find_or_create_by(name: genre_name)
 
-    movie.genre = genre
+    # movie.genre = genre
     movie.save
     movie
   end
