@@ -61,7 +61,7 @@ class OmdbService
     movies.uniq! { |movie| movie.imdb_id }
 
     # Filter out movies without a poster
-    movies_with_posters = movies.select { |movie| movie.poster_url != "N/A" }
+    movies_with_posters = movies.select { |movie| movie.poster_image_url != "N/A" }
 
     # Return the first `count` movies from the array
     movies_with_posters.first(count)
