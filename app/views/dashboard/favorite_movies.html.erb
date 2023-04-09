@@ -1,9 +1,28 @@
 <h1>Favorite Movies</h1>
 
-<% @user_movie_lists.where(favorite: true).each do |user_movie_list| %>
-  <div>
-    <%= user_movie_list.movie.title %>
+<% if movies.present? %>
+  <div class="movie-card-container">
+    <% movies.each do |movie| %>
+      <div class="movie-card">
+        <div class="movie-poster">
+          <% if movie.poster_image_url.present? && movie.poster_image_url != "N/A" %>
+            <img src="<%= movie.poster_image_url %>" alt="<%= movie.title %>">
+          <% else %>
+            <p>No poster available</p>
+          <% end %>
+        </div>
+        <div class="movie-info">
+          <h3><%= movie.title %></h3>
+          <p>Genre: <%= movie.genre.name %></p>
+          <p>Release Date: <%= movie.year %></p>
+          <div class="movie-details">
+            <% user_movie_list = current_user.user_movie_lists.find_by(movie: movie) %>
+            <%= link_to "Show Details", show_by_imdb_id_path(movie.imdb_id), class: "btn-show" %>
+            <%= link_to 'Remove from List', user_movie_list_path(user_movie_list), turbo_method: :delete, class: 'btn-show' %>
+          </div>
+        </div>
+      </div>
+    <% end %>
   </div>
 <% end %>
 
-<%= link_to "Back to User Movie Lists", user_movie_lists_path %>

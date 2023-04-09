@@ -53,6 +53,19 @@ class UserMovieListsController < ApplicationController
     end
   end
 
+  def destroy
+    user_movie_list = current_user.user_movie_lists.find(params[:id])
+
+    if user_movie_list.destroy
+      flash[:notice] = "Movie removed from your list."
+    else
+      flash[:alert] = "An error occurred while removing the movie from your list."
+    end
+
+    redirect_to dashboard_path
+  end
+
+
   private
 
   def user_movie_list_params
