@@ -1,6 +1,6 @@
 class Movie < ApplicationRecord
   belongs_to :mood_tag
-  belongs_to :genre
+  has_and_belongs_to_many :genres
   has_many :ratings, dependent: :destroy
   has_many :user_movie_lists, dependent: :destroy
   has_many :users, through: :user_movie_lists, dependent: :destroy

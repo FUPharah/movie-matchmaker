@@ -2,17 +2,19 @@
 <li class="nav-item dropdown">
   <%= link_to "Genre", "#", class: "nav-link dropdown-toggle", id: "genreDropdown", role: "button", data: { bs_toggle: "dropdown" }, aria: {expanded: "false", haspopup: "true"} %>
   <div class="dropdown-menu" aria-labelledby="genreDropdown">
-    <% Genre.all.each do |genre| %>
-      <%= link_to genre.name, root_path(genre: genre.name), class: "dropdown-item" %>
+    <% Genre.distinct.pluck(:name).flat_map { |genre_names| genre_names.split(', ') }.uniq.each do |genre_name| %>
+      <%= link_to genre_name, root_path(genre: genre_name), class: "dropdown-item" %>
     <% end %>
   </div>
 </li>
+
 <!-- Mood Dropdown -->
 <li class="nav-item dropdown">
   <%= link_to "Moods", "#", class: "nav-link dropdown-toggle", id: "moodDropdown", role: "button", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
   <div class="dropdown-menu" aria-labelledby="moodDropdown">
-    <% MoodTag.all.each do |mood_tag| %>
-      <%= link_to mood_tag.name, root_path(mood: mood_tag.name), class: "dropdown-item" %>
+    <% MoodTag.distinct.pluck(:name).flat_map { |mood_tag_names| mood_tag_names.split(', ') }.uniq.each do |mood_tag_name| %>
+      <%= link_to mood_tag_name, root_path(mood: mood_tag_name), class: "dropdown-item" %>
     <% end %>
   </div>
 </li>
+
