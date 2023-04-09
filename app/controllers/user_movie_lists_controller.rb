@@ -11,13 +11,20 @@ class UserMovieListsController < ApplicationController
 
   def update
     @user_movie_list = UserMovieList.find(params[:id])
+
     if @user_movie_list.update(user_movie_list_params)
+      if params[:user_movie_list][:watchlist] == "1"
+        @user_movie_list.update(is_favorite: false, watchlist: true)
+      elsif params[:user_movie_list][:is_favorite] == "1"
+        @user_movie_list.update(is_favorite: true, watchlist: false)
+      end
       redirect_to dashboard_path
     else
       @movie = Movie.find(params[:movie_id])
       render :edit, status: :unprocessable_entity
     end
   end
+
 
   def add_to_watchlist
     @movie = Movie.find(params[:movie_id])

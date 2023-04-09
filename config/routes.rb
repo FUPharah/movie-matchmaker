@@ -11,8 +11,8 @@ Rails.application.routes.draw do
       get :add_watchlist
     end
   end
-  
-  resources :user_movie_lists, only: %i[create destroy] do
+
+  resources :user_movie_lists, only: %i[create destroy edit update] do
     collection do
       get :favorite
       get :watchlist
