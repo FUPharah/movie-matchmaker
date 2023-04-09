@@ -19,7 +19,7 @@ class Movie < ApplicationRecord
     genre_name = movie_details['Genre'].split(',').first.strip
     genre = Genre.find_or_create_by(name: genre_name)
 
-    movie.genre = genre
+    movie.genres = [genre]
     movie.save
     movie
   end
