@@ -1,6 +1,6 @@
 class Movie < ApplicationRecord
-  belongs_to :genre
   belongs_to :mood_tag
+  belongs_to :genre
   has_many :ratings, dependent: :destroy
   has_many :user_movie_lists, dependent: :destroy
   has_many :users, through: :user_movie_lists, dependent: :destroy
@@ -13,7 +13,7 @@ class Movie < ApplicationRecord
       year: movie_details['Year'],
       imdb_id: movie_details['imdbID'],
       poster_image_url: movie_details['Poster'],
-      mood_tag: mood_tag_instance,
+      mood_tag: mood_tag_instance
     )
 
     genre_name = movie_details['Genre'].split(',').first.strip

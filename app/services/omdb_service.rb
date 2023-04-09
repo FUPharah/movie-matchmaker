@@ -72,10 +72,12 @@ class OmdbService
   def self.create_movie_object(movie_data)
     return nil if movie_data['Poster'] == 'N/A'
 
+    genre_names = movie_data['Genre'].split(", ").join(", ")
+
     Movie.new(
       title: movie_data['Title'],
       year: movie_data['Year'],
-      genre: map_genre_to_model(movie_data['Genre']),
+      genre: Genre.find_by(name: genre_names.split(", ").first),
       poster_image_url: movie_data['Poster'],
       imdb_id: movie_data['imdbID'],
       mood_tag: MoodTag.find_by(name: MOOD_TAGS[movie_data['Genre'].to_sym])
