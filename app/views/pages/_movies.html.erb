@@ -1,3 +1,5 @@
+<%# pages#_movies.html.erb partial %>
+
 <% if movies.present? %>
   <div class="movie-card-container">
     <% movies.each do |movie| %>
@@ -11,7 +13,7 @@
         </div>
         <div class="movie-info">
           <h3><%= movie.title %></h3>
-          <p>Genre: <%= movie.genre.name %></p>
+          <p>Genre: <%= movie.genre.name if movie.genre.present? %></p>
           <p>Release Date: <%= movie.year %></p>
           <div class="movie-details">
             <%# <p>Mood: <%= movie.mood_tag %></p>
