@@ -4,10 +4,12 @@
 
 <h1>Favorite Movies</h1>
 
-<% favorite_movies = current_user.user_movie_lists.where(is_favorite: true).map(&:movie) %>
-<%= render partial: 'dashboard_movie_cards', locals: { movies: favorite_movies } %>
+<% favorite_user_movie_lists = current_user.user_movie_lists.where(is_favorite: true) %>
+<% favorite_movies = favorite_user_movie_lists.map(&:movie) %>
+<%= render partial: 'dashboard_movie_cards', locals: { movies: favorite_movies.zip(favorite_user_movie_lists) } %>
 
 <h2>Watchlist Movies</h2>
 
-<% watchlist_movies = current_user.user_movie_lists.where(watchlist: true).map(&:movie) %>
-<%= render partial: 'dashboard_movie_cards', locals: { movies: watchlist_movies } %>
+<% watchlist_user_movie_lists = current_user.user_movie_lists.where(watchlist: true) %>
+<% watchlist_movies = watchlist_user_movie_lists.map(&:movie) %>
+<%= render partial: 'dashboard_movie_cards', locals: { movies: watchlist_movies.zip(watchlist_user_movie_lists) } %>

@@ -1,22 +1,21 @@
-<h1>Favorites or Watchlist</h1>
+<h1>Edit Movie</h1>
 
-<%= form_for @user_movie_list, url: { action: "create", movie_id: @movie.id } do |f| %>
-  <%= f.hidden_field :movie_id, value: @movie.id %>
-
-  <div>
-    <label>
-      <%= f.radio_button :is_favorite, true %>
-      Add to Favorites
-    </label>
-  </div>
-  <div>
-    <label>
-      <%= f.radio_button :is_favorite, false %>
-      Add to Watchlist
-    </label>
+<%= form_with(model: @user_movie_list, url: user_movie_list_path(@user_movie_list), method: :put) do |form| %>
+  <div class="form-group">
+    <%= form.label :is_favorite, "Add to Favorites:" %>
+    <%= form.check_box :is_favorite, {}, "1", "0" %>
   </div>
 
-  <%= f.submit "Edit Movie" %>
+  <div class="form-group">
+    <%= form.label :watchlist, "Add to Watchlist:" %>
+    <%= form.check_box :watchlist, {}, "1", "0" %>
+  </div>
+
+  <%= form.submit "Save changes", class: "btn btn-primary" %>
 <% end %>
 
-<%= link_to "Back", movie_path(@movie) %>
+<%= link_to 'Remove from List', user_movie_list_path(@user_movie_list), data: {
+                    turbo_method: :delete,
+                    turbo_confirm: "Are you sure?"
+                  }, class: 'btn-show' %>
+<%= link_to 'Back', dashboard_path, class: 'btn btn-secondary' %>
