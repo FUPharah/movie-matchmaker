@@ -7,7 +7,6 @@ class DashboardController < ApplicationController
     @user_watched_movies = current_user.user_movie_lists.where(is_favorite: false).map(&:movie)
   end
 
-
   def favorite
     @user_movie_list = UserMovieList.create(
       user: current_user,

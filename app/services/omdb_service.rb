@@ -45,25 +45,14 @@ class OmdbService
   end
 
   def self.search_movies_by_mood(mood, count = 10)
-    # Find the corresponding genres for the given mood
     genres = MOOD_TAGS.select { |_, value| value == mood }.keys.map(&:to_s)
-
-    # Initialize an empty array to store movie objects
     movies = []
-
-    # Iterate through the genres and fetch movies
     genres.each do |genre|
       fetched_movies = search_movies_by_genre(genre, count)
       movies.concat(fetched_movies)
     end
-
-    # Remove duplicate movies based on their IMDB ID
     movies.uniq! { |movie| movie.imdb_id }
-
-    # Filter out movies without a poster
     movies_with_posters = movies.select { |movie| movie.poster_image_url != "N/A" }
-
-    # Return the first `count` movies from the array
     movies_with_posters.first(count)
   end
 
@@ -72,12 +61,12 @@ class OmdbService
   def self.create_movie_object(movie_data)
     return nil if movie_data['Poster'] == 'N/A'
 
-    genre_names = movie_data['Genre'].split(", ").join(", ")
+    genre_names = movie_data['Genre']
 
     Movie.new(
       title: movie_data['Title'],
       year: movie_data['Year'],
-      genre: Genre.find_by(name: genre_names.split(", ").first),
+      genre: Genre.find_or_create_by(name: genre_names),
       poster_image_url: movie_data['Poster'],
       imdb_id: movie_data['imdbID'],
       mood_tag: MoodTag.find_by(name: MOOD_TAGS[movie_data['Genre'].to_sym])
