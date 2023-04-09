@@ -1,4 +1,4 @@
-<h1>Watchlist</h1>
+<!-- app/views/_dashboard_movie_cards.html.erb -->
 
 <% if movies.present? %>
   <div class="movie-card-container">
@@ -18,11 +18,13 @@
           <div class="movie-details">
             <% user_movie_list = current_user.user_movie_lists.find_by(movie: movie) %>
             <%= link_to "Show Details", show_by_imdb_id_path(movie.imdb_id), class: "btn-show" %>
-            <%= link_to 'Remove from List', user_movie_list_path(user_movie_list), turbo_method: :delete, class: 'btn-show' %>
+            <%= link_to 'Remove from List', user_movie_list_path(user_movie_list), data: {
+                    turbo_method: :delete,
+                    turbo_confirm: "Are you sure?"
+                  }, class: 'btn-show' %>
           </div>
         </div>
       </div>
     <% end %>
   </div>
 <% end %>
-
