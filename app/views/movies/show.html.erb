@@ -1,8 +1,13 @@
-<h1>movies show</h1>
-<div class="movie-card">
+<h1><%= @movie["Title"] %></h1>
+<div class="movie-card" style="margin: 0 auto; text-align: center;">
   <% if @movie["Response"] == "True" %>
     <div class="movie-poster">
-      <img src="<%= @movie["Poster"] %>" alt="<%= @movie["Title"] %>">
+      <div class="front">
+        <img src="<%= @movie["Poster"] %>" alt="<%= @movie["Title"] %>">
+      </div>
+      <div class="back">
+        <p><%= @movie["Plot"] %></p>
+      </div>
     </div>
     <div class="movie-info">
       <h3><%= @movie["Title"] %></h3>
@@ -19,4 +24,4 @@
     </div>
   <% end %>
 </div>
-<%= link_to "Back to Home", root_path, class: "btn btn-primary" %>
+<%= link_to "Back to Home", root_path, class: "btn btn-secondary" %>

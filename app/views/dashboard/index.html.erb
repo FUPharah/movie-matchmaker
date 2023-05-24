@@ -1,15 +1,25 @@
 <!-- app/views/dashboard/index.html.erb -->
 
-<h1>Dashboard</h1>
+<h1 style="text-align: center">Dashboard</h1>
 
-<h1>Favorite Movies</h1>
+<h1 style="text-align: center">Favorite Movies</h1>
 
 <% favorite_user_movie_lists = current_user.user_movie_lists.where(is_favorite: true) %>
 <% favorite_movies = favorite_user_movie_lists.map(&:movie) %>
-<%= render partial: 'dashboard_movie_cards', locals: { movies: favorite_movies.zip(favorite_user_movie_lists) } %>
 
-<h2>Watchlist Movies</h2>
+<% if favorite_movies.any? %>
+  <%= render partial: 'dashboard_movie_cards', locals: { movies: favorite_movies.zip(favorite_user_movie_lists) } %>
+<% else %>
+  <p style="text-align: center">You don't have any favorite movies.</p>
+<% end %>
+
+<h2 style="text-align: center">Watchlist Movies</h2>
 
 <% watchlist_user_movie_lists = current_user.user_movie_lists.where(watchlist: true) %>
 <% watchlist_movies = watchlist_user_movie_lists.map(&:movie) %>
-<%= render partial: 'dashboard_movie_cards', locals: { movies: watchlist_movies.zip(watchlist_user_movie_lists) } %>
+
+<% if watchlist_movies.any? %>
+  <%= render partial: 'dashboard_movie_cards', locals: { movies: watchlist_movies.zip(watchlist_user_movie_lists) } %>
+<% else %>
+  <p style="text-align: center">You don't have any watchlisted movies.</p>
+<% end %>

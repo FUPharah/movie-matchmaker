@@ -1,3 +1,5 @@
+
+<div style="margin-left: 20px; margin-top: 20px">
 <h1>Edit Movie</h1>
 
 <%= form_with(model: @user_movie_list, url: user_movie_list_path(@user_movie_list), method: :put) do |form| %>
@@ -6,16 +8,23 @@
     <%= form.check_box :is_favorite, {}, "1", "0" %>
   </div>
 
-  <div class="form-group">
+  <div class="form-group" style="margin-bottom: 10px">
     <%= form.label :watchlist, "Add to Watchlist:" %>
     <%= form.check_box :watchlist, {}, "1", "0" %>
   </div>
 
-  <%= form.submit "Save changes", class: "btn btn-primary" %>
+  <%= form.submit "Save changes", class: "btn btn-secondary" %>
 <% end %>
 
-<%= link_to 'Remove from List', user_movie_list_path(@user_movie_list), data: {
+<div class="button-group">
+  <%= link_to 'Remove from List', user_movie_list_path(@user_movie_list), data: {
                     turbo_method: :delete,
                     turbo_confirm: "Are you sure?"
-                  }, class: 'btn-show' %>
-<%= link_to 'Back', dashboard_path, class: 'btn btn-secondary' %>
+                  }, class: 'btn btn-secondary' %>
+</div>
+
+<div class="button-group">
+  <%= link_to 'Back', dashboard_path, class: 'btn btn-secondary' %>
+</div>
+
+</div>

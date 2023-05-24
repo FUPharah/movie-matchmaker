@@ -6,7 +6,7 @@
     <%= form.label :search, "Search for a movie:" %>
     <%= form.text_field :search, class: "form-control", value: params[:search] %>
   </div>
-  <%= form.submit "Search", class: "btn btn-primary" %>
+  <%= form.submit "Search", class: "btn btn-secondary" %>
 <% end %>
 
 <% if flash[:warning] %>
@@ -19,15 +19,15 @@
   <h2>Search Results</h2>
   <%= render 'movies', movies: @movies %>
 <% else %>
-  <h2>Featured Movies</h2>
+  <h2 style="text-align: center">Featured Movies</h2>
   <%= render 'movies', movies: @featured_movies %>
 
-  <h2>Action Movies</h2>
+  <h2 style="text-align: center">Action Movies</h2>
   <%= render 'movies', movies: @action_movies %>
 
-  <h2>Romance Movies</h2>
+  <h2 style="text-align: center">Romance Movies</h2>
   <%= render 'movies', movies: @romance_movies %>
 
-  <h2>Comedy Movies</h2>
+  <h2 style="text-align: center">Comedy Movies</h2>
   <%= render 'movies', movies: @comedy_movies %>
 <% end %>
