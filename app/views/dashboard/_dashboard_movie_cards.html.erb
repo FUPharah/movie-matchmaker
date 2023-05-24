@@ -1,7 +1,7 @@
 <!-- app/views/_dashboard_movie_cards.html.erb -->
 
 <% if movies.present? %>
-  <div class="movie-card-container">
+  <div class="movie-card-container" style="margin-top: 10px; margin-left: 10px;">
     <% movies.each do |movie, user_movie_list| %>
       <div class="movie-card">
         <div class="movie-poster">
@@ -12,7 +12,7 @@
           <% end %>
         </div>
         <div class="movie-info">
-          <h3><%= movie.title %></h3>
+          <h3 style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><%= movie.title %></h3>
           <p>Genre: <%= movie.genre_names %></p>
           <p>Release Date: <%= movie.year %></p>
           <div class="movie-details">
@@ -21,10 +21,12 @@
                     turbo_method: :delete,
                     turbo_confirm: "Are you sure?"
                   }, class: 'btn-show' %>
-            <%= link_to "Edit", edit_user_movie_list_path(id: user_movie_list.id, movie_id: movie.id), class: "btn btn-warning" %>
+            <%= link_to "Edit", edit_user_movie_list_path(id: user_movie_list.id, movie_id: movie.id), class: "btn btn-secondary" %>
           </div>
         </div>
       </div>
     <% end %>
   </div>
+<% else %>
+  <p style="text-align: center">You don't have any movies in this list.</p>
 <% end %>
